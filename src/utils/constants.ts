@@ -1,6 +1,6 @@
 export const Role = {
-  Admin: "Admin",
   User: "User",
+  Organization: "Organization",
 };
 
 export const Provider = {
