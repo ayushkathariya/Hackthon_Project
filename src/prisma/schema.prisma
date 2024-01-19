@@ -27,7 +27,7 @@ model VerifyUser {
   email     String
   password  String
   otp       Int
-  expiresAt DateTime @default(dbgenerated("now() + interval '60 minutes'"))
+  expiresAt DateTime
   createdAt DateTime @default(now())
 }
 

@@ -124,7 +124,7 @@ export default function Page() {
           </Button>
           <FormDescription className="text-center font-semibold">
             Don't have an account ?
-            <Link href={"/signup"} className="underline text-black">
+            <Link href={"/signup"} className="underline text-black ml-1">
               Signup
             </Link>
           </FormDescription>

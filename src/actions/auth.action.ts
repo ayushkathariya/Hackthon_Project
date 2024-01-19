@@ -36,6 +36,7 @@ export const signupUser = async (
         email: email,
         password: hashedPassword,
         otp: Number(otp as any),
+        expiresAt: new Date(new Date().getTime() + 10 * 60 * 1000),
       },
     });
 
@@ -65,7 +66,7 @@ export const signupUser = async (
 
     return { message: "OTP sent successfully" };
   } catch (error) {
-    return { error: "Internal Server Error" };
+    return { error: "Something went wrong" };
   }
 };
 
@@ -102,6 +103,6 @@ export const verifyUser = async (otp: number, email: string) => {
 
     return { message: "OTP verified successfully" };
   } catch (error) {
-    return { error: "Internal Server Error" };
+    return { error: "Something went wrong" };
   }
 };
