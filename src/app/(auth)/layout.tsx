@@ -26,7 +26,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <NextAuthProvider>{children}</NextAuthProvider>
-        <ToastContainer />
+        <ToastContainer autoClose={1500} />
       </body>
     </html>
   );
