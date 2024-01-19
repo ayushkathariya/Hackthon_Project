@@ -1,24 +1,33 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  password  String?
-  image     String?
-  provider  Provider
-  role      Role     @default(User)
-  createdAt DateTime @default(now())
+  id           String         @id @default(cuid())
+  name         String
+  email        String         @unique
+  password     String?
+  profileImage String?
+  provider     Provider
+  role         Role           @default(User)
+  posts        Post[]
+  comments     Comment[]
+  likes        PostLike[]
+  Reply        Reply[]
+  ReplyLike    ReplyLike[]
+  Complain     Complain[]
+  Organization Organization[]
+  createdAt    DateTime       @default(now())
+}
+
+model Organization {
+  id                String     @id @default(cuid())
+  name              String
+  description       String
+  organizationImage String
+  admin             User       @relation(fields: [adminId], references: [id])
+  adminId           String
+  complains         Complain[]
+  createdAt         DateTime   @default(now())
 }
 
 model VerifyUser {
@@ -29,6 +38,64 @@ model VerifyUser {
   otp       Int
   expiresAt DateTime
   createdAt DateTime @default(now())
+}
+
+model Post {
+  id        String     @id @default(cuid())
+  caption   String
+  postImage String
+  user      User       @relation(fields: [userId], references: [id])
+  userId    String
+  comments  Comment[]
+  likes     PostLike[]
+  createdAt DateTime   @default(now())
+}
+
+model PostLike {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+  createdAt DateTime @default(now())
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  message   String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+  replies   Reply[]
+  createdAt DateTime @default(now())
+}
+
+model Reply {
+  id        String   @id @default(cuid())
+  message   String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  commentId String
+  createdAt DateTime @default(now())
+}
+
+model ReplyLike {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+}
+
+model Complain {
+  id         String       @id @default(cuid())
+  message    String
+  SenderUser User         @relation(fields: [senderId], references: [id])
+  senderId   String
+  Receiver   Organization @relation(fields: [receiverId], references: [id])
+  receiverId String
+  createdAt  DateTime     @default(now())
 }
 
 enum Provider {
