@@ -27,6 +27,22 @@ type Post = {
   createdAt: Date;
 };
 
+type Event = {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  eventImage: string | null;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    image: string;
+  };
+  expiresAt: Date;
+  createdAt: Date;
+};
+
 export const postWrapper = (post: Post) => {
   return {
     id: post?.id,
@@ -42,5 +58,23 @@ export const postWrapper = (post: Post) => {
     commentsCount: post?.comments.length,
     timeAgo: timeAgo.format(post?.createdAt),
     createdAt: timeAgo.format(post?.createdAt),
+  };
+};
+
+export const eventWrapper = (event: Event) => {
+  return {
+    id: event?.id,
+    title: event?.title,
+    description: event?.description,
+    eventImage: event?.eventImage,
+    location: event?.location,
+    user: {
+      id: event?.user?.id,
+      name: event?.user?.name,
+      email: event?.user?.email,
+      image: event?.user?.image,
+    },
+    timeAgo: timeAgo.format(event?.createdAt),
+    expiresAt: timeAgo.format(event?.expiresAt),
   };
 };

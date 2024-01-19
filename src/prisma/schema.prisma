@@ -25,6 +25,7 @@ model User {
   ReplyLike ReplyLike[]
   issuses   Issue[]
   createdAt DateTime    @default(now())
+  Event     Event[]
 }
 
 model VerifyUser {
@@ -94,6 +95,18 @@ model Issue {
   issueImage  String?
   user        User     @relation(fields: [userId], references: [id])
   userId      String
+  createdAt   DateTime @default(now())
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  location    String
+  eventImage  String?
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  expiresAt   DateTime
   createdAt   DateTime @default(now())
 }
 
