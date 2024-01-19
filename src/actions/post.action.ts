@@ -10,6 +10,27 @@ import { postWrapper } from "@/utils/response-wrapper";
 // Cloudinary Configuration
 cloudinaryConfig();
 
+export const getPost = async (id: string) => {
+  try {
+    const post = await prisma.post.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        user: true,
+        likes: true,
+        comments: true,
+      },
+    });
+
+    const wrappedPost = postWrapper(post as any);
+
+    return { wrappedPost };
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
 export const getPosts = async () => {
   try {
     const session = await getAuthSession();

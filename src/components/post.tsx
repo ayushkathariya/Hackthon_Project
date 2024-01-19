@@ -7,6 +7,7 @@ import { FaRegComment } from "react-icons/fa";
 import { doPostLike } from "@/actions/like.action";
 import { toast } from "react-toastify";
 import { FacebookShareButton } from "react-share";
+import { useRouter } from "next/navigation";
 
 type PostProps = {
   id: string;
@@ -31,6 +32,8 @@ export default function Post({
   userImage,
   userName,
 }: PostProps) {
+  const router = useRouter();
+
   return (
     <div className="border md:ml-24 lg:ml-36 mt-3 py-2 px-3 w-[26rem] md:w-[38rem] rounded">
       {/* Profile */}
@@ -50,7 +53,10 @@ export default function Post({
         <p>{caption}</p>
       </div>
       {/* Image */}
-      <div className="mt-2">
+      <div
+        className="mt-2 cursor-pointer"
+        onClick={() => router.push(`/posts/${id}`)}
+      >
         <img
           src={postImg}
           alt="Post"

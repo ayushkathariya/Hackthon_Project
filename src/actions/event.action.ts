@@ -10,6 +10,30 @@ import { eventWrapper } from "@/utils/response-wrapper";
 // Cloudinary Configuration
 cloudinaryConfig();
 
+export const getEvent = async (id: string) => {
+  try {
+    const event = await prisma?.event.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        user: true,
+        likes: true,
+      },
+    });
+
+    if (!event) {
+      return { error: "Not Found" };
+    }
+
+    const wrappedEvent = eventWrapper(event as any);
+
+    return { wrappedEvent };
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
 export const getEvents = async () => {
   try {
     const events = await prisma?.event.findMany({
