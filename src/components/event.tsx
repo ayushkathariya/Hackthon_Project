@@ -2,9 +2,9 @@
 
 import AvatarPhoto from "./avatar-photo";
 import { AiOutlineLike } from "react-icons/ai";
-import { IoIosShareAlt } from "react-icons/io";
-import { FaRegComment } from "react-icons/fa";
-import { useState } from "react";
+import { FaRegComment, FaShare } from "react-icons/fa";
+import { doEventLike } from "@/actions/like.action";
+import { FacebookShareButton } from "react-share";
 
 type EventProps = {
   id: string;
@@ -15,6 +15,7 @@ type EventProps = {
   userId: string;
   userImage: string;
   userName: string;
+  likesCount: number;
   timeAgo: String;
   expiresAt: string;
 };
@@ -30,9 +31,8 @@ export default function Event({
   userId,
   userImage,
   userName,
+  likesCount,
 }: EventProps) {
-  const [likes, setLike] = useState(false);
-
   return (
     <div className="border md:ml-24 lg:ml-36 mt-3 py-2 px-3 w-[26rem] md:w-[38rem] rounded">
       {/* Profile */}
@@ -73,20 +73,24 @@ export default function Event({
       </div>
       {/* Buttons */}
       <div className="flex justify-between mt-2 px-1">
-        <div className="flex items-center gap-1">
-          {likes ? (
-            <AiOutlineLike className="text-lg cursor-pointer" />
-          ) : (
-            <AiOutlineLike color="blue" className="text-lg cursor-pointer" />
-          )}
-          {/* <p>{likesCount}</p> */}
+        <div
+          className="flex items-center gap-1"
+          onClick={async () => await doEventLike(id)}
+        >
+          <AiOutlineLike color="blue" className="text-lg cursor-pointer" />
+          <p>{likesCount}</p>
         </div>
         <div className="flex items-center gap-1">
           <FaRegComment className="text-lg cursor-pointer" />
           {/* <p>{commentsCount}</p> */}
         </div>
-        <div className="flex items-center gap-1">
-          <IoIosShareAlt className="text-lg cursor-pointer" />
+        <div>
+          <FacebookShareButton
+            url={`${process.env.NEXT_PUBLIC_BASE_URL}/events/${id}`}
+            className="Demo__some-network__share-button"
+          >
+            <FaShare size={20} />
+          </FacebookShareButton>
         </div>
       </div>
     </div>

@@ -39,6 +39,12 @@ type Event = {
     email: string;
     image: string;
   };
+  likes: {
+    id: string;
+    userId: string;
+    eventId: string;
+    createdAt: Date;
+  }[];
   expiresAt: Date;
   createdAt: Date;
 };
@@ -74,6 +80,7 @@ export const eventWrapper = (event: Event) => {
       email: event?.user?.email,
       image: event?.user?.image,
     },
+    likesCount: event?.likes.length,
     timeAgo: timeAgo.format(event?.createdAt),
     expiresAt: timeAgo.format(event?.expiresAt),
   };

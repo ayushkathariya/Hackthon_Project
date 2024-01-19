@@ -4,7 +4,9 @@ import AvatarPhoto from "./avatar-photo";
 import { AiOutlineLike } from "react-icons/ai";
 import { IoIosShareAlt } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa";
-import { useState } from "react";
+import { doPostLike } from "@/actions/like.action";
+import { toast } from "react-toastify";
+import { FacebookShareButton } from "react-share";
 
 type PostProps = {
   id: string;
@@ -29,8 +31,6 @@ export default function Post({
   userImage,
   userName,
 }: PostProps) {
-  const [likes, setLike] = useState(false);
-
   return (
     <div className="border md:ml-24 lg:ml-36 mt-3 py-2 px-3 w-[26rem] md:w-[38rem] rounded">
       {/* Profile */}
@@ -59,12 +59,16 @@ export default function Post({
       </div>
       {/* Buttons */}
       <div className="flex justify-between mt-2 px-1">
-        <div className="flex items-center gap-1">
-          {likes ? (
-            <AiOutlineLike className="text-lg cursor-pointer" />
-          ) : (
-            <AiOutlineLike color="blue" className="text-lg cursor-pointer" />
-          )}
+        <div
+          className="flex items-center gap-1"
+          onClick={async () => {
+            const { error } = await doPostLike(id);
+            if (error) {
+              toast.error(error);
+            }
+          }}
+        >
+          <AiOutlineLike color="blue" className="text-lg cursor-pointer" />
           <p>{likesCount}</p>
         </div>
         <div className="flex items-center gap-1">
@@ -72,7 +76,12 @@ export default function Post({
           <p>{commentsCount}</p>
         </div>
         <div className="flex items-center gap-1">
-          <IoIosShareAlt className="text-lg cursor-pointer" />
+          <FacebookShareButton
+            url={`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${id}`}
+            className="Demo__some-network__share-button"
+          >
+            <IoIosShareAlt className="text-lg cursor-pointer" />
+          </FacebookShareButton>
         </div>
       </div>
     </div>

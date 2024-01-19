@@ -6,6 +6,7 @@ import { getAuthSession } from "@/utils/auth";
 import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ThemeProvider from "@/components/providers/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,10 +24,17 @@ export default async function RootLayout({
   if (session) redirect("/");
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <NextAuthProvider>{children}</NextAuthProvider>
-        <ToastContainer autoClose={1500} />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextAuthProvider>{children}</NextAuthProvider>
+          <ToastContainer autoClose={1500} />
+        </ThemeProvider>
       </body>
     </html>
   );

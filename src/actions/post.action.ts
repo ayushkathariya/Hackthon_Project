@@ -12,6 +12,8 @@ cloudinaryConfig();
 
 export const getPosts = async () => {
   try {
+    const session = await getAuthSession();
+
     const posts = await prisma?.post.findMany({
       include: {
         user: true,
@@ -24,6 +26,8 @@ export const getPosts = async () => {
       ?.map((post) => postWrapper(post as any))
       .reverse();
     return { wrappedPosts };
+
+    console.log(wrappedPosts);
   } catch (error) {
     return { error: "Error" };
   }

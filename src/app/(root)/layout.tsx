@@ -5,6 +5,7 @@ import NextAuthProvider from "@/components/providers/session-provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NavbarLayout from "@/components/navbar-layout";
+import ThemeProvider from "@/components/providers/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,13 +20,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <NextAuthProvider>
-          <NavbarLayout />
-          <div className="mt-10 lg:ml-[21.5rem]">{children}</div>
-        </NextAuthProvider>
-        <ToastContainer autoClose={1500} />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextAuthProvider>
+            <NavbarLayout />
+            <div className="mt-10 lg:ml-[21.5rem]">{children}</div>
+          </NextAuthProvider>
+          <ToastContainer autoClose={1500} />
+        </ThemeProvider>
       </body>
     </html>
   );

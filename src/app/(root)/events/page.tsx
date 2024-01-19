@@ -5,7 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 export default async function Page() {
-  const { wrappedEvents, error } = await getEvents();
+  const { wrappedEvents } = await getEvents();
 
   return (
     <div>
@@ -27,6 +27,7 @@ export default async function Page() {
           userId={event?.user?.id}
           userImage={event?.user?.image}
           userName={event?.user?.name}
+          likesCount={event?.likesCount}
         />
       ))}
     </div>

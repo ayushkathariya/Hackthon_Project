@@ -21,11 +21,10 @@ model User {
   posts     Post[]
   comments  Comment[]
   likes     PostLike[]
-  Reply     Reply[]
-  ReplyLike ReplyLike[]
   issuses   Issue[]
   createdAt DateTime    @default(now())
   Event     Event[]
+  EventLike EventLike[]
 }
 
 model VerifyUser {
@@ -65,24 +64,6 @@ model Comment {
   userId    String
   post      Post     @relation(fields: [postId], references: [id])
   postId    String
-  replies   Reply[]
-  createdAt DateTime @default(now())
-}
-
-model Reply {
-  id        String   @id @default(cuid())
-  message   String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  comment   Comment  @relation(fields: [commentId], references: [id])
-  commentId String
-  createdAt DateTime @default(now())
-}
-
-model ReplyLike {
-  id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
   createdAt DateTime @default(now())
 }
 
@@ -99,15 +80,25 @@ model Issue {
 }
 
 model Event {
-  id          String   @id @default(cuid())
+  id          String      @id @default(cuid())
   title       String
   description String
   location    String
   eventImage  String?
-  user        User     @relation(fields: [userId], references: [id])
+  user        User        @relation(fields: [userId], references: [id])
   userId      String
   expiresAt   DateTime
-  createdAt   DateTime @default(now())
+  createdAt   DateTime    @default(now())
+  likes       EventLike[]
+}
+
+model EventLike {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   String
+  createdAt DateTime @default(now())
 }
 
 enum Provider {
