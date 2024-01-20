@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import NextAuthProvider from "@/components/providers/session-provider";
-import { getAuthSession } from "@/utils/auth";
-import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ThemeProvider from "@/components/providers/theme-provider";
@@ -20,9 +18,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getAuthSession();
-  if (session) redirect("/");
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
