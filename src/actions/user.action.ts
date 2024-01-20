@@ -62,6 +62,6 @@ export const updateUser = async (image: string, name: string) => {
   } catch (error) {
     return { error: "Something went wrong" };
   } finally {
-    revalidatePath("/user/:id");
+    revalidatePath("/");
   }
 };
