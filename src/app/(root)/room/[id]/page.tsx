@@ -6,8 +6,6 @@ import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 export default function Page({ params }: { params: { id: string } }) {
   const { data } = useSession();
 
-  console.log(data);
-
   const myMeeting = async (element: any) => {
     const appId = 288370170;
     const serverSecret = "0a5ae6ea8ddde5f691e8ef8524fdd9c9";

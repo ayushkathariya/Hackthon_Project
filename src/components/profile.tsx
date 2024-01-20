@@ -25,10 +25,7 @@ export default function Profile({ image, name }: ProfileProps) {
         </CardHeader>
         <CardContent>
           <img
-            src={
-              image ||
-              "https://images.pexels.com/photos/1687675/pexels-photo-1687675.jpeg?auto=compress&cs=tinysrgb&w=400"
-            }
+            src={image || "https://github.com/shadcn.png"}
             alt="image"
             className="w-60 h-60 rounded-full"
           />

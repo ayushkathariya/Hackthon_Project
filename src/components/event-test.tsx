@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -7,6 +9,9 @@ import {
 } from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
+import { donateMoney } from "@/actions/donate.action";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 type NewEventsProps = {
   id: string;
@@ -39,6 +44,8 @@ export default function NewEvents({
   userImage,
   userName,
 }: NewEventsProps) {
+  const router = useRouter();
+
   return (
     <div className="h-fit">
       <div className="w-[100%]]">
@@ -68,7 +75,20 @@ export default function NewEvents({
             </CardContent>
             <CardFooter>
               <div className="flex gap-3 justify-between flex-wrap">
-                <Button variant="outline">Register</Button>
+                <Button
+                  variant="outline"
+                  onClick={async () => {
+                    const { data, error } = await donateMoney();
+                    if (data) {
+                      router.push(data.payment_url);
+                    }
+                    if (error) {
+                      toast.error("Something went wrong");
+                    }
+                  }}
+                >
+                  Register
+                </Button>
                 <Button variant="outline">View More</Button>
               </div>
             </CardFooter>

@@ -54,7 +54,7 @@ export default function Organization({
                   variant="secondary"
                   onClick={() => router.push("/events")}
                 >
-                  Upcoming Events
+                  Upcoming
                 </Button>
                 <Button
                   className="px-8"

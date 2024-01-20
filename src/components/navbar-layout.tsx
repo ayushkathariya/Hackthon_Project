@@ -27,10 +27,7 @@ export default async function AdminLayout() {
         <ModeToggle />
         <Link href={`/user/${session?.user?.id}`}>
           <AvatarIcon
-            imageUrl={
-              session?.user?.image ||
-              "https://images.pexels.com/photos/14875250/pexels-photo-14875250.jpeg"
-            }
+            imageUrl={session?.user?.image || "https://github.com/shadcn.png"}
           />
         </Link>
       </div>
