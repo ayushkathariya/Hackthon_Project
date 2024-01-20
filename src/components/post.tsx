@@ -38,7 +38,10 @@ export default function Post({
     <div className="border md:ml-24 lg:ml-36 mt-3 py-2 px-3 w-[26rem] md:w-[38rem] rounded">
       {/* Profile */}
       <div className="flex justify-between items-center">
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2"
+          onClick={() => router.push(`/user/${userId}`)}
+        >
           <AvatarPhoto
             imageUrl={userImage || "https://github.com/shadcn.png"}
           />
