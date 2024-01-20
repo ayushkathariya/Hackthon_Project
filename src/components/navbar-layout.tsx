@@ -20,7 +20,7 @@ export default async function AdminLayout() {
           </span>
         </div>
         <div className="lg:ml-[21.5rem]">
-          <h1 className="font-bold">Eco Unity</h1>
+          <h1 className="font-bold text-lg">Eco Unity</h1>
         </div>
       </div>
       <div className="flex gap-2">

@@ -3,7 +3,6 @@
 import AvatarPhoto from "./avatar-photo";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment, FaShare } from "react-icons/fa";
-import { doEventLike } from "@/actions/like.action";
 import { FacebookShareButton } from "react-share";
 import { useRouter } from "next/navigation";
 
@@ -82,10 +81,7 @@ export default function Event({
       </div>
       {/* Buttons */}
       <div className="flex justify-between mt-2 px-1">
-        <div
-          className="flex items-center gap-1"
-          onClick={async () => await doEventLike(id)}
-        >
+        <div className="flex items-center gap-1">
           <AiOutlineLike color="blue" className="text-lg cursor-pointer" />
           <p>{likesCount}</p>
         </div>

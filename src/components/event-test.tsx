@@ -76,7 +76,6 @@ export default function NewEvents({
             <CardFooter>
               <div className="flex gap-3 justify-between flex-wrap">
                 <Button
-                  variant="outline"
                   onClick={async () => {
                     const { data, error } = await donateMoney();
                     if (data) {
@@ -89,7 +88,6 @@ export default function NewEvents({
                 >
                   Register
                 </Button>
-                <Button variant="outline">View More</Button>
               </div>
             </CardFooter>
           </Card>
