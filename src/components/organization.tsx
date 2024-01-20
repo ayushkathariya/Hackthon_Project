@@ -37,7 +37,7 @@ export default function Organization({
             <CardTitle>
               <div className="big-image">
                 <img
-                  className="h-[480px] w-[100%] rounded-xl"
+                  className="h-[480px] w-[100%] rounded-xl object-contain"
                   src={image as string}
                   alt="User Background Images"
                 />
