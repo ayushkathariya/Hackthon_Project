@@ -5,7 +5,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const { wrappedEvent, error } = await getEvent(params.id);
 
   return (
-    <>
+    <div className="flex justify-around">
       {wrappedEvent && (
         <SingleEvent
           id={wrappedEvent?.id as string}
@@ -22,6 +22,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           eventImage={wrappedEvent?.eventImage as string}
         />
       )}
-    </>
+    </div>
   );
 }

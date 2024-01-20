@@ -37,7 +37,7 @@ export default function SingleEvent({
   const router = useRouter();
 
   return (
-    <div className="border md:ml-24 lg:ml-36 mt-3 py-2 px-3 h-[80vh] flex flex-col justify-around  w-[26rem] md:w-[38rem] rounded">
+    <div className="border mt-3 py-2 px-3 h-[80vh] flex flex-col justify-around  w-[26rem] md:w-[38rem] rounded">
       {/* Profile */}
       <div className="flex justify-between items-center">
         <div
@@ -74,7 +74,7 @@ export default function SingleEvent({
         <img
           src={eventImage}
           alt="Post"
-          className="rounded h-52 object-cover w-full"
+          className="rounded h-64 object-cover w-full"
         />
       </div>
       {/* Buttons */}

@@ -15,26 +15,28 @@ export default async function Page() {
       <div>
         {session?.user?.role === Role.Organization && (
           <Link href="/events/create">
-            <Button className="ml-2">Create</Button>
+            <Button className="ml-8 lg:ml-16 w-24">Create</Button>
           </Link>
         )}
       </div>
-      {wrappedEvents?.map((event) => (
-        <Event
-          key={event?.id}
-          description={event?.description}
-          eventImage={event?.eventImage as string}
-          expiresAt={event?.expiresAt}
-          id={event?.id}
-          location={event?.location}
-          timeAgo={event?.timeAgo}
-          title={event?.title}
-          userId={event?.user?.id}
-          userImage={event?.user?.image}
-          userName={event?.user?.name}
-          likesCount={event?.likesCount}
-        />
-      ))}
+      <div className="flex flex-wrap justify-around">
+        {wrappedEvents?.map((event) => (
+          <Event
+            key={event?.id}
+            description={event?.description}
+            eventImage={event?.eventImage as string}
+            expiresAt={event?.expiresAt}
+            id={event?.id}
+            location={event?.location}
+            timeAgo={event?.timeAgo}
+            title={event?.title}
+            userId={event?.user?.id}
+            userImage={event?.user?.image}
+            userName={event?.user?.name}
+            likesCount={event?.likesCount}
+          />
+        ))}
+      </div>
     </div>
   );
 }

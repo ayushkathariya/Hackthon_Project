@@ -41,14 +41,14 @@ export default function CreatePost() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-2 w-[480px] lg:w-[610px] items-start ml-2 mt-3 lg:ml-36"
+      className="flex flex-col gap-2 w-[480px] lg:w-[800px] items-start ml-2 mt-3 lg:ml-36"
     >
       <div>
         <div className="flex justify-center gap-3">
           <Input
             type="text"
             placeholder="Enter your issue"
-            className="px-2 py-2  border rounded outline-none w-96 lg:w-[500px] mt-4 focus:ring focus:ring-blue-100"
+            className="px-2 py-2  border rounded outline-none w-96 lg:w-[610px] mt-4 focus:ring focus:ring-blue-100"
             onChange={(e) => setCaption(e.target.value)}
             minLength={10}
             required
@@ -57,12 +57,12 @@ export default function CreatePost() {
         {postImage && (
           <img
             alt="post"
-            className="justify-center rounded h-52 w-96 mt-3 lg:w-[500px]"
+            className="justify-center rounded h-52 w-96 mt-3 lg:w-[610px] lg:h-60"
             src={postImage}
           />
         )}
       </div>
-      <div className="flex gap-72 lg:gap-[25.3rem]">
+      <div className="flex gap-72 lg:gap-[32.3rem]">
         <span>
           <input
             id="create-post"
