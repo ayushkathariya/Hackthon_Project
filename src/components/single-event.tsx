@@ -5,6 +5,7 @@ import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment, FaShare } from "react-icons/fa";
 import { doEventLike } from "@/actions/like.action";
 import { FacebookShareButton } from "react-share";
+import { useRouter } from "next/navigation";
 
 type EventProps = {
   id: string;
@@ -33,11 +34,16 @@ export default function SingleEvent({
   userName,
   likesCount,
 }: EventProps) {
+  const router = useRouter();
+
   return (
     <div className="border md:ml-24 lg:ml-36 mt-3 py-2 px-3 h-[80vh] flex flex-col justify-around  w-[26rem] md:w-[38rem] rounded">
       {/* Profile */}
       <div className="flex justify-between items-center">
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => router.push(`/user/${userId}`)}
+        >
           <AvatarPhoto
             imageUrl={userImage || "https://github.com/shadcn.png"}
           />

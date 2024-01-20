@@ -39,7 +39,7 @@ export default function Post({
       {/* Profile */}
       <div className="flex justify-between items-center">
         <div
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 cursor-pointer"
           onClick={() => router.push(`/user/${userId}`)}
         >
           <AvatarPhoto

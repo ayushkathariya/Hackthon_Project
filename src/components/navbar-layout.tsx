@@ -5,7 +5,7 @@ import ModeToggle from "./buttons/toggle-button";
 
 export default async function AdminLayout() {
   return (
-    <div className="fixed top-0 z-20 w-full flex justify-between px-1">
+    <div className="fixed top-1 z-20 w-full flex justify-between px-1">
       <div className="flex">
         <div>
           <span className="lg:hidden">
