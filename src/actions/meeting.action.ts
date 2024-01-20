@@ -3,7 +3,7 @@
 import { v4 as uuidv4 } from "uuid";
 import nodemailer from "nodemailer";
 
-export const createMeeting = async () => {
+export const createMeeting = async (email: string) => {
   try {
     const randomId = uuidv4();
     const transporter = nodemailer.createTransport({
@@ -17,7 +17,7 @@ export const createMeeting = async () => {
 
     const mailOptions = {
       from: process.env.MAIL_HOST,
-      to: process.env.MAIL_ORGANIZATION,
+      to: email,
       subject: "OTP Verification",
       text: `Your meeting room link is <a>&{${process.env.NEXT_PUBLIC_BASE_URL}/room/${randomId}}</a>`,
     };

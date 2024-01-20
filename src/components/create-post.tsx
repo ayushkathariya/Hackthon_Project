@@ -41,25 +41,28 @@ export default function CreatePost() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-2 justify-start items-start ml-2 mt-3"
+      className="flex flex-col gap-2 w-[480px] lg:w-[610px] items-start ml-2 mt-3 lg:ml-36"
     >
-      <div className="flex justify-center gap-3">
-        <Input
-          type="text"
-          placeholder="Enter your issue"
-          className="px-2 py-2 border rounded outline-none w-80 focus:ring focus:ring-blue-100"
-          onChange={(e) => setCaption(e.target.value)}
-          required
-        />
+      <div>
+        <div className="flex justify-center gap-3">
+          <Input
+            type="text"
+            placeholder="Enter your issue"
+            className="px-2 py-2  border rounded outline-none w-96 lg:w-[500px] mt-4 focus:ring focus:ring-blue-100"
+            onChange={(e) => setCaption(e.target.value)}
+            minLength={10}
+            required
+          />
+        </div>
+        {postImage && (
+          <img
+            alt="post"
+            className="justify-center rounded h-52 w-96 mt-3 lg:w-[500px]"
+            src={postImage}
+          />
+        )}
       </div>
-      {postImage && (
-        <img
-          alt="post"
-          className="justify-center rounded h-52 w-[29rem]"
-          src={postImage}
-        />
-      )}
-      <div className="flex">
+      <div className="flex gap-72 lg:gap-[25.3rem]">
         <span>
           <input
             id="create-post"
@@ -69,7 +72,7 @@ export default function CreatePost() {
             onChange={handleImageChange}
           />
           <label htmlFor="create-post" className="cursor-pointer">
-            <FcGallery className="mr-60 sm:mr-[27rem] md:mr-[38rem] lg:mr-[20rem] xl:mr-[22rem] 2xl:mr-[32rem] text-[2.2rem] text-green-600 cursor-pointer" />
+            <FcGallery className="text-[2.2rem] text-green-600 cursor-pointer" />
           </label>
         </span>
         <Button type="submit">Post</Button>

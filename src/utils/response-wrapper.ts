@@ -1,3 +1,4 @@
+import { Provider, Role } from "@prisma/client";
 import TimeAgo from "javascript-time-ago";
 
 import en from "javascript-time-ago/locale/en";
@@ -49,6 +50,17 @@ type Event = {
   createdAt: Date;
 };
 
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  password: string | null;
+  image: string | null;
+  provider: Provider;
+  role: Role;
+  createdAt: Date;
+};
+
 export const postWrapper = (post: Post) => {
   return {
     id: post?.id,
@@ -83,5 +95,17 @@ export const eventWrapper = (event: Event) => {
     likesCount: event?.likes.length,
     timeAgo: timeAgo.format(event?.createdAt),
     expiresAt: timeAgo.format(event?.expiresAt),
+  };
+};
+
+export const organizationUserWrapper = (user: User) => {
+  return {
+    id: user?.id,
+    name: user?.name,
+    email: user?.email,
+    image: user?.image,
+    provider: user?.provider,
+    role: user?.role,
+    createdAt: timeAgo.format(user?.createdAt),
   };
 };

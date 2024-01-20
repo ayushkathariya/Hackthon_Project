@@ -72,7 +72,9 @@ export default function Page() {
   };
 
   const handleRoom = async () => {
-    const { error, message } = await createMeeting();
+    const { error, message } = await createMeeting(
+      process.env.MAIL_ORGANIZATION!
+    );
     if (error) {
       toast.error(error);
     } else {
@@ -82,15 +84,21 @@ export default function Page() {
 
   return (
     <div className="px-3">
-      <Button className="mt-2" type="button" onClick={handleRoom}>
-        Emergency Call <MdCall className="ml-2 text-2xl" color="green" />
-      </Button>
-      <div className="w-full flex justify-center">
+      <div className="text-start">
+        <Button
+          className="mt-2 ml-4 lg:ml-52"
+          type="button"
+          onClick={handleRoom}
+        >
+          Emergency Call <MdCall className="ml-2 text-2xl" color="green" />
+        </Button>
+      </div>{" "}
+      <div className="w-full flex mt-4 justify-center">
         <form onSubmit={handleSubmit}>
           <Card className="w-[450px] md:w-[500px]">
             <CardHeader>
               <CardTitle className="text-center">Issue Form</CardTitle>
-              <CardDescription className="text-center">
+              <CardDescription className="text-center mt-1">
                 Report website issues easily with our simple and easy online
                 form.
               </CardDescription>
@@ -104,6 +112,7 @@ export default function Page() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Enter the title of the issue"
+                    minLength={5}
                     required
                   />
                 </div>
@@ -114,6 +123,7 @@ export default function Page() {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Enter the description of the issue"
+                    minLength={10}
                     required
                   />
                 </div>
@@ -125,6 +135,8 @@ export default function Page() {
                     value={contact}
                     onChange={(e) => setContact(e.target.value)}
                     placeholder="Enter your contact number"
+                    minLength={10}
+                    maxLength={10}
                     required
                   />
                 </div>
@@ -136,6 +148,7 @@ export default function Page() {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="Example: Koshi Province, Sunsari, Dharan"
+                    minLength={4}
                     required
                   />
                 </div>

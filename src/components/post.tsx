@@ -63,7 +63,7 @@ export default function Post({
         <img
           src={postImg}
           alt="Post"
-          className="rounded h-52 object-cover w-full"
+          className="rounded h-80 object-cover w-full"
         />
       </div>
       {/* Buttons */}
