@@ -16,6 +16,9 @@ import { Label } from "@/components/ui/label";
 import { FcAddImage } from "react-icons/fc";
 import { toast } from "react-toastify";
 import { createEvent } from "@/actions/event.action";
+import { useSession } from "next-auth/react";
+import { Role } from "@/utils/constants";
+import { redirect } from "next/navigation";
 
 export default function Page() {
   const [title, setTitle] = React.useState("");
@@ -23,6 +26,11 @@ export default function Page() {
   const [location, setLocation] = React.useState("");
   const [expiresAt, setExpiresAt] = React.useState("");
   const [image, setImage] = React.useState("");
+
+  const session = useSession();
+  if (session?.data?.user?.role !== Role.Organization) {
+    redirect("/");
+  }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileInput = e.target;

@@ -4,11 +4,13 @@ import prisma from "@/utils/prisma";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import randomstring from "randomstring";
+import { Role } from "@prisma/client";
 
 export const signupUser = async (
   name: string,
   email: string,
-  password: string
+  password: string,
+  role: string
 ) => {
   try {
     if (!name || !email || !password) {
@@ -36,6 +38,7 @@ export const signupUser = async (
         email: email,
         password: hashedPassword,
         otp: Number(otp as any),
+        role: role as Role,
         expiresAt: new Date(new Date().getTime() + 10 * 60 * 1000),
       },
     });
@@ -92,6 +95,7 @@ export const verifyUser = async (otp: number, email: string) => {
         email: verifiedUser.email,
         password: verifiedUser?.password,
         provider: "Credentials",
+        role: verifiedUser?.role,
       },
     });
 

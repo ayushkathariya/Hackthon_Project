@@ -1,18 +1,23 @@
 import { getEvents } from "@/actions/event.action";
 import Event from "@/components/event";
 import { Button } from "@/components/ui/button";
+import { getAuthSession } from "@/utils/auth";
+import { Role } from "@/utils/constants";
 import Link from "next/link";
 import React from "react";
 
 export default async function Page() {
   const { wrappedEvents } = await getEvents();
+  const session = await getAuthSession();
 
   return (
-    <div>
+    <div className="pt-2">
       <div>
-        <Link href="/events/create">
-          <Button className="ml-2">Create</Button>
-        </Link>
+        {session?.user?.role === Role.Organization && (
+          <Link href="/events/create">
+            <Button className="ml-2">Create</Button>
+          </Link>
+        )}
       </div>
       {wrappedEvents?.map((event) => (
         <Event

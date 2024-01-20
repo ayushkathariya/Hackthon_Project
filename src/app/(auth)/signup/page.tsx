@@ -21,6 +21,16 @@ import { signupUser } from "@/actions/auth.action";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useEffect, useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,6 +46,16 @@ const formSchema = z.object({
 
 export default function Page() {
   const router = useRouter();
+  const [selectedRole, setSelectedRole] = useState("User");
+
+  const handleRoleChange = (e: any) => {
+    setSelectedRole(e.target.value);
+  };
+
+  useEffect(() => {
+    console.log(selectedRole);
+  }, [selectedRole]);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,7 +69,8 @@ export default function Page() {
     const { error, message } = await signupUser(
       values?.name,
       values?.email,
-      values?.password
+      values?.password,
+      selectedRole
     );
     if (error) {
       toast.error(error, {
@@ -121,6 +142,15 @@ export default function Page() {
               </FormItem>
             )}
           />
+          <label htmlFor="roleSelect">Select Role:</label>
+          <select
+            id="roleSelect"
+            value={selectedRole}
+            onChange={handleRoleChange}
+          >
+            <option value="User">User</option>
+            <option value="Organization">Organization</option>
+          </select>
           <div className="mt-2">
             <Button
               type="submit"

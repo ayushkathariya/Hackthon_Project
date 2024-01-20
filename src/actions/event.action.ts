@@ -6,6 +6,7 @@ import { getAuthSession } from "@/utils/auth";
 import { v2 as cloudinary } from "cloudinary";
 import { revalidatePath } from "next/cache";
 import { eventWrapper } from "@/utils/response-wrapper";
+import { Role } from "@/utils/constants";
 
 // Cloudinary Configuration
 cloudinaryConfig();
@@ -66,7 +67,7 @@ export const createEvent = async (
     }
 
     const session = await getAuthSession();
-    if (!session) {
+    if (!session || session?.user?.role !== Role.Organization) {
       return { error: "Not Authorized" };
     }
 
