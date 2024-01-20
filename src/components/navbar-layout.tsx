@@ -4,6 +4,7 @@ import SidebarDesktop from "./sidebar-desktop";
 import ModeToggle from "./buttons/toggle-button";
 import { getAuthSession } from "@/utils/auth";
 import Link from "next/link";
+import { IoEarthSharp } from "react-icons/io5";
 
 export default async function AdminLayout() {
   const session = await getAuthSession();
@@ -20,7 +21,9 @@ export default async function AdminLayout() {
           </span>
         </div>
         <div className="lg:ml-[21.5rem]">
-          <h1 className="font-bold text-lg">Eco Unity</h1>
+          <Link href={"/"}>
+            <IoEarthSharp className="text-[32px] mt-1 text-green-500" />
+          </Link>
         </div>
       </div>
       <div className="flex gap-2">
