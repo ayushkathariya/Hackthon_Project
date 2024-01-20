@@ -110,6 +110,7 @@ export default function Page() {
                   <Input
                     id="description"
                     value={description}
+                    type="text"
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Enter the description of the event"
                     required
@@ -122,7 +123,7 @@ export default function Page() {
                     type="text"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    placeholder="In Date"
+                    placeholder="Enter the location"
                     required
                   />
                 </div>
@@ -134,7 +135,7 @@ export default function Page() {
                     type="text"
                     value={deadline}
                     onChange={(e) => setDeadline(e.target.value)}
-                    placeholder="In Date"
+                    placeholder="Enter Deadline"
                     required
                   />
                 </div>
@@ -146,7 +147,7 @@ export default function Page() {
                     type="text"
                     value={heldIn}
                     onChange={(e) => setHeldIn(e.target.value)}
-                    placeholder="In Date"
+                    placeholder="Enter Held In"
                     required
                   />
                 </div>
@@ -158,7 +159,7 @@ export default function Page() {
                     type="text"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
-                    placeholder="In Rupees"
+                    placeholder="In Nrs."
                     required
                   />
                 </div>
