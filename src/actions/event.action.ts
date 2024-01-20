@@ -19,7 +19,6 @@ export const getEvent = async (id: string) => {
       },
       include: {
         user: true,
-        likes: true,
       },
     });
 
@@ -40,7 +39,6 @@ export const getEvents = async () => {
     const events = await prisma?.event.findMany({
       include: {
         user: true,
-        likes: true,
       },
     });
 
@@ -59,10 +57,20 @@ export const createEvent = async (
   description: string,
   location: string,
   eventImage: string,
-  expiresAt: number
+  deadline: string,
+  heldIn: string,
+  price: number
 ) => {
   try {
-    if (!title || !description || !location || !eventImage || !expiresAt) {
+    if (
+      !title ||
+      !description ||
+      !location ||
+      !eventImage ||
+      !deadline ||
+      !heldIn ||
+      !price
+    ) {
       return { error: "All fields are required" };
     }
 
@@ -86,12 +94,16 @@ export const createEvent = async (
             id: session?.user?.id,
           },
         },
-        expiresAt: new Date(new Date().getTime() + expiresAt * 60 * 1000),
+        deadline,
+        heldIn,
+        price,
       },
     });
 
     return { message: "Event Created Successfully" };
   } catch (error) {
+    console.log(error);
+
     return { error: "Something went wrong" };
   } finally {
     revalidatePath("/events");

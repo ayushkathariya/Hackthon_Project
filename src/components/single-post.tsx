@@ -77,7 +77,10 @@ export default function SinglePost({
           <AiOutlineLike color="blue" className="text-lg cursor-pointer" />
           <p>{likesCount}</p>
         </div>
-        <div className="flex items-center gap-1">
+        <div
+          className="flex items-center gap-1"
+          onClick={() => router.push(`/posts/${id}`)}
+        >
           <FaRegComment className="text-lg cursor-pointer" />
           <p>{commentsCount}</p>
         </div>

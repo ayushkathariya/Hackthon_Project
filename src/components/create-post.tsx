@@ -22,6 +22,9 @@ export default function CreatePost() {
     if (message) {
       toast.success(message);
     }
+
+    setCaption("");
+    setPostImage("");
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

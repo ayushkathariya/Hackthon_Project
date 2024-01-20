@@ -11,20 +11,19 @@ datasource db {
 }
 
 model User {
-  id        String      @id @default(cuid())
+  id        String     @id @default(cuid())
   name      String
-  email     String      @unique
+  email     String     @unique
   password  String?
   image     String?
   provider  Provider
-  role      Role        @default(User)
+  role      Role       @default(User)
   posts     Post[]
   comments  Comment[]
   likes     PostLike[]
   issuses   Issue[]
-  createdAt DateTime    @default(now())
+  createdAt DateTime   @default(now())
   Event     Event[]
-  EventLike EventLike[]
 }
 
 model VerifyUser {
@@ -33,6 +32,7 @@ model VerifyUser {
   email     String
   password  String
   otp       Int
+  role      Role     @default(User)
   expiresAt DateTime
   createdAt DateTime @default(now())
 }
@@ -80,25 +80,17 @@ model Issue {
 }
 
 model Event {
-  id          String      @id @default(cuid())
+  id          String   @id @default(cuid())
   title       String
   description String
   location    String
-  eventImage  String?
-  user        User        @relation(fields: [userId], references: [id])
+  eventImage  String
+  user        User     @relation(fields: [userId], references: [id])
   userId      String
-  expiresAt   DateTime
-  createdAt   DateTime    @default(now())
-  likes       EventLike[]
-}
-
-model EventLike {
-  id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  event     Event    @relation(fields: [eventId], references: [id])
-  eventId   String
-  createdAt DateTime @default(now())
+  deadline    String
+  heldIn      String
+  price       Float
+  createdAt   DateTime @default(now())
 }
 
 enum Provider {

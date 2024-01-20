@@ -33,19 +33,15 @@ type Event = {
   description: string;
   location: string;
   eventImage: string | null;
+  heldIn: string;
+  deadline: string;
+  price: number;
   user: {
     id: string;
     name: string;
     email: string;
     image: string;
   };
-  likes: {
-    id: string;
-    userId: string;
-    eventId: string;
-    createdAt: Date;
-  }[];
-  expiresAt: Date;
   createdAt: Date;
 };
 
@@ -110,15 +106,16 @@ export const eventWrapper = (event: Event) => {
     description: event?.description,
     eventImage: event?.eventImage,
     location: event?.location,
+    heldIn: event?.heldIn,
+    deadLine: event?.deadline,
+    price: event?.price,
     user: {
       id: event?.user?.id,
       name: event?.user?.name,
       email: event?.user?.email,
       image: event?.user?.image,
     },
-    likesCount: event?.likes.length,
     timeAgo: timeAgo.format(event?.createdAt),
-    expiresAt: timeAgo.format(event?.expiresAt),
   };
 };
 

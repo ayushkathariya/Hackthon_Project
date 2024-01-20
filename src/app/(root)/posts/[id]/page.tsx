@@ -4,7 +4,7 @@ import CreateComment from "@/components/create-comment";
 import SinglePost from "@/components/single-post";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const { error, wrappedPost } = await getPost(params.id);
+  const { wrappedPost } = await getPost(params.id);
 
   return (
     <div className="flex justify-around flex-col items-center">

@@ -2,8 +2,12 @@ import AvatarIcon from "@/components/avatar-photo";
 import SideBarMobile from "./sidebar-mobile";
 import SidebarDesktop from "./sidebar-desktop";
 import ModeToggle from "./buttons/toggle-button";
+import { getAuthSession } from "@/utils/auth";
+import Link from "next/link";
 
 export default async function AdminLayout() {
+  const session = await getAuthSession();
+
   return (
     <div className="fixed top-1 z-20 w-full flex justify-between px-1">
       <div className="flex">
@@ -21,7 +25,14 @@ export default async function AdminLayout() {
       </div>
       <div className="flex gap-2">
         <ModeToggle />
-        <AvatarIcon imageUrl="https://images.pexels.com/photos/14875250/pexels-photo-14875250.jpeg" />
+        <Link href={`/user/${session?.user?.id}`}>
+          <AvatarIcon
+            imageUrl={
+              session?.user?.image ||
+              "https://images.pexels.com/photos/14875250/pexels-photo-14875250.jpeg"
+            }
+          />
+        </Link>
       </div>
     </div>
   );

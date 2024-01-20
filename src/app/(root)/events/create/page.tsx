@@ -24,8 +24,10 @@ export default function Page() {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [location, setLocation] = React.useState("");
-  const [expiresAt, setExpiresAt] = React.useState("");
+  const [deadline, setDeadline] = React.useState("");
   const [image, setImage] = React.useState("");
+  const [heldIn, setHeldIn] = React.useState("");
+  const [price, setPrice] = React.useState("");
 
   const session = useSession();
   if (session?.data?.user?.role !== Role.Organization) {
@@ -51,7 +53,9 @@ export default function Page() {
     setDescription("");
     setLocation("");
     setImage("");
-    setExpiresAt("");
+    setDeadline("");
+    setPrice("");
+    setHeldIn("");
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,7 +65,9 @@ export default function Page() {
       description,
       location,
       image,
-      Number(expiresAt)
+      deadline,
+      heldIn,
+      Number(price)
     );
 
     if (error) {
@@ -110,24 +116,49 @@ export default function Page() {
                   />
                 </div>
                 <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="expire">Expires at</Label>
-                  <Input
-                    id="expire"
-                    type="text"
-                    value={expiresAt}
-                    onChange={(e) => setExpiresAt(e.target.value)}
-                    placeholder="In minutes"
-                    required
-                  />
-                </div>
-                <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="location">Location</Label>
                   <Input
                     id="location"
                     type="text"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    placeholder="Example: Koshi Province, Sunsari, Dharan"
+                    placeholder="In Date"
+                    required
+                  />
+                </div>
+                {/* Deadline */}
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="deadline">Deadline</Label>
+                  <Input
+                    id="deadline"
+                    type="text"
+                    value={deadline}
+                    onChange={(e) => setDeadline(e.target.value)}
+                    placeholder="In Date"
+                    required
+                  />
+                </div>
+                {/* Held In */}
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="heldin">Held In</Label>
+                  <Input
+                    id="heldin"
+                    type="text"
+                    value={heldIn}
+                    onChange={(e) => setHeldIn(e.target.value)}
+                    placeholder="In Date"
+                    required
+                  />
+                </div>
+                {/* Price */}
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="price">Price</Label>
+                  <Input
+                    id="price"
+                    type="text"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    placeholder="In Rupees"
                     required
                   />
                 </div>
