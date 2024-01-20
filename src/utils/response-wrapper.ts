@@ -1,6 +1,5 @@
 import { Provider, Role } from "@prisma/client";
 import TimeAgo from "javascript-time-ago";
-
 import en from "javascript-time-ago/locale/en";
 
 TimeAgo.addDefaultLocale(en);
@@ -61,6 +60,31 @@ type User = {
   createdAt: Date;
 };
 
+type postComment = {
+  id: string;
+  message: string;
+  userId: string;
+  postId: string;
+  createdAt: Date;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    password: string | null;
+    image: string | null;
+    provider: Provider;
+    role: Role;
+    createdAt: Date;
+  };
+  post: {
+    id: string;
+    caption: string;
+    postImage: string;
+    userId: string;
+    createdAt: Date;
+  };
+};
+
 export const postWrapper = (post: Post) => {
   return {
     id: post?.id,
@@ -107,5 +131,22 @@ export const organizationUserWrapper = (user: User) => {
     provider: user?.provider,
     role: user?.role,
     createdAt: timeAgo.format(user?.createdAt),
+  };
+};
+
+export const postCommentWrapper = (postComment: postComment) => {
+  return {
+    id: postComment.id,
+    message: postComment.message,
+    createdAt: timeAgo.format(postComment.createdAt),
+    user: {
+      userId: postComment.user.id,
+      userName: postComment.user.name,
+      userEmail: postComment.user.email,
+      userImage: postComment?.user.image,
+    },
+    post: {
+      postId: postComment.post.id,
+    },
   };
 };

@@ -1,10 +1,9 @@
 import Post from "@/components/post";
-import SignoutButton from "@/components/buttons/signout.button";
 import { getPosts } from "@/actions/post.action";
 import CreatePost from "@/components/create-post";
 
 export default async function Page() {
-  const { error, wrappedPosts } = await getPosts();
+  const { wrappedPosts } = await getPosts();
 
   return (
     <div>
@@ -27,7 +26,6 @@ export default async function Page() {
           />
         ))}
       </div>
-      <SignoutButton />
     </div>
   );
 }
