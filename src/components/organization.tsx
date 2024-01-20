@@ -35,7 +35,7 @@ export default function Organization({
         <Card>
           <CardHeader>
             <CardTitle>
-              <div className="big-image">
+              <div>
                 <img
                   className="h-[480px] w-[100%] rounded-xl object-contain"
                   src={image as string}
@@ -45,9 +45,9 @@ export default function Organization({
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="user_description flex flex-col items-start gap-4 ">
-              <p className="user-intro">Organization Name: {name}</p>
-              <p className="user-intro">Email: {email}</p>
+            <div className="flex flex-col items-start gap-4 ">
+              <p className="font-medium">Organization Name: {name}</p>
+              <p className="font-medium">Email: {email}</p>
               <div className="event flex gap-4 flex-wrap">
                 <Button
                   className="px-8"

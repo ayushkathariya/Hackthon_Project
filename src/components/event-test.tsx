@@ -52,13 +52,11 @@ export default function NewEvents({
         <div className="main flex flex-wrap">
           <Card className="w-[22rem] m-2">
             <CardHeader>
-              <CardTitle>
-                <img
-                  className="w-100% h-64"
-                  src={eventImage}
-                  alt="Event Image"
-                />
-              </CardTitle>
+              <img
+                className="w-100% h-64 rounded"
+                src={eventImage}
+                alt="Event Image"
+              />
             </CardHeader>
             <CardContent>
               <div className="flex flex-col gap-2">
